@@ -1,6 +1,3 @@
-# encryptionAndSignature
-An example project for all sorts of data encryption, signature, certificate usage, SSL cert usage.
-
 Topic 1) RSA 
 
 This involves public key & private key. Receiver of the message sends across the public key to sender of the message.
