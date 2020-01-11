@@ -45,13 +45,20 @@ Advantages and disadvantages
 Symmetric algorithms provide a fairly high level of security while at the same time allowing for messages to be encrypted and decrypted quickly. The relative simplicity of symmetric systems is also a logistical advantage, as they require less computing power than the asymmetric ones. In addition, the security provided by symmetric encryption can be scaled up simply by increasing key lengths. For every single bit added to the length of a symmetric key, the difficulty of cracking the encryption through a brute force attack increases exponentially.
 While symmetric encryption offers a wide range of benefits, there is one major disadvantage associated with it: the inherent problem of transmitting the keys used to encrypt and decrypt data. When these keys are shared over an unsecured connection, they are vulnerable to being intercepted by malicious third parties. If an unauthorized user gains access to a particular symmetric key, the security of any data encrypted using that key is compromised. To solve this problem, many web protocols use a combination of symmetric and asymmetric encryption to establish secure connections. Among the most prominent examples of such a hybrid system is the Transport Layer Security (TLS) cryptographic protocol used to secure large portions of the modern internet.
 
+Topic 2) Certificates
+
+Topic 3) SSL certificates
+
+topic 4) Certificates from CA
 
 
+Topic 5) MAC - Message authentication code (Used for authentication as well as integrity of message exchanged)
 HMAC-256 : Hash based Message Authentication Code.
-Creater first encrypts the message with secret it has, then computes hash. 
-Creater sends message (i.e. unencrypted message) & hash to receiver.
-Receiver encrypts the message with secret key (i.e. creater & receiver should use same key) & computes the hash.
-If computed hash & received hash matches then message is correct.
+1) Creater of message first encrypts the message with secret it has, then computes hash. 
+2) Creater sends a pair of message (i.e. unencrypted message) & hash computed in step (1) to receiver. (Note: in this type of MAC, user shall not care if the message is read by third party person. Message is not supposed to have sensitive info.)
+3) Receiver encrypts the message (i.e. unencrypted message from step (2)) with secret key it has (i.e. creater & receiver should use same key) & computes the hash upon receiving pair of message & hash from sender.
+4) If computed hash in step (3) & received hash matches then message is correct.
 This way we validate data integrity (if message is modified in the transit, then hash computed by receiver will be different than received hash) and authenticity (i.e. if key used is different then computed hash will be different than received hash)
+5) Based on the content of message, receiver would take different actions.
 
 RSASHA256 :
