@@ -12,7 +12,7 @@ A limitation of RSA is that you cannot encrypt anything longer than the key size
 To avoid this limitation in case of large message, RSA can be used in following way:
 Public key encryption can also be used to encrypt the symmetric key (symmetric key using which actual data to exchanged in encrypted). With this symmetric key encrypted using public key and data encrypted using symmetric key can be sent over the wire. Receiver in this case using Private key he has decrypts the first part to get symmetric key and using symmetric key decrypts the actual data.  
 
-Another limitation of assymetric encryption is it is high CPU itensive & time consuming since encryption & decryption rely on maths (http://www.muppetlabs.com/~breadbox/txt/rsa.html). So the standard practise is to encrypt the message with symmetric key. And encrypt the symmetric key with Public key of RSA. Receiver has Private key of RSA, receiver would use private key to decrypt & get symmetric key. Use this symmetric key to decrypt the message.
+Another limitation of assymetric encryption is it is high CPU itensive & time consuming since encryption & decryption rely on complex maths formulas (http://www.muppetlabs.com/~breadbox/txt/rsa.html). So the standard practise is to encrypt the message with symmetric key. And encrypt the symmetric key with Public key of RSA. Receiver has Private key of RSA, receiver would use private key to decrypt & deduce symmetric key. Use this symmetric key to decrypt the message.
 
 topic 1A) How are the public key, private key pair generated.
 http://www.muppetlabs.com/~breadbox/txt/rsa.html
