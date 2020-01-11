@@ -54,7 +54,28 @@ While symmetric encryption offers a wide range of benefits, there is one major d
 
 
 Topic 2) Certificates
+Certificates have a purpose: to establish trust.
 
+2.1) Authentication over network
+
+What is data signature: Private/public key explained earlier are used here. In case of data encryption generelly sender uses receiver's public key encrypt the data it wants to send to receiver. Receiver upon receiving the data uses it's owen private key to decrypt the message. Whereas signature is reverse case, here sender uses it's own private key to sign randomly generated data. Now user sends signed data and public key to receiver. Receiver uses public key of sender to validated the signed data. In this way receiver validates the sender. Data signature is used in validating the sender. 
+
+There's one more way to perform authentication over n/w by using symmetric key. 
+1) Client upon sign-up to a server (i.e. sign up to Gmail) creates paswword.
+2) Now, hash of this password is shared with server securely.
+3) Server stores this hash of passowrd against the user name in DB.
+4) Next time when user logs in, user supplies user-name & password to the server (e.g. Gmail)
+5) Either the password or hash of password along with user name is sent to server over secure channel.
+6) Server retrives the hash of password from DB for the given user and compares it with hash of password it received as part of sign-in.
+7) If hash mathces, then server confirms the identity of user.
+
+https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.0/html/Deployment_Guide/Introduction_to_Public_Key_Cryptography-Certificates_and_Authentication.html
+
+2.1.a) Use of certificates in client to server authentication
+
+2.1.b) Use of certificates in server to server authetication.
+
+2.2) Data encryption over network
 
 
 Topic 3) SSL certificates
