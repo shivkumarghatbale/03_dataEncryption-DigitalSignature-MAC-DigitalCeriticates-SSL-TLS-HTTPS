@@ -51,10 +51,23 @@ Topic 1.4) Advantages and disadvantages
 Symmetric algorithms provide a fairly high level of security while at the same time allowing for messages to be encrypted and decrypted quickly. The relative simplicity of symmetric systems is also a logistical advantage, as they require less computing power than the asymmetric ones. In addition, the security provided by symmetric encryption can be scaled up simply by increasing key lengths. For every single bit added to the length of a symmetric key, the difficulty of cracking the encryption through a brute force attack increases exponentially.
 While symmetric encryption offers a wide range of benefits, there is one major disadvantage associated with it: the inherent problem of transmitting the keys used to encrypt and decrypt data. When these keys are shared over an unsecured connection, they are vulnerable to being intercepted by malicious third parties. If an unauthorized user gains access to a particular symmetric key, the security of any data encrypted using that key is compromised. To solve this problem, many web protocols use a combination of symmetric and asymmetric encryption to establish secure connections. Among the most prominent examples of such a hybrid system is the Transport Layer Security (TLS) cryptographic protocol used to secure large portions of the modern internet.
 
-
+Topic 1.5) encryption vs signature
 
 Topic 2) Certificates
 Certificates have a purpose: to establish trust.
+What all the things a certificate generally has?
+- certificate version number
+- Certificate issuer (e.g. CN = Thawte RSA CA 2018, OU = www.digicert.com, O = DigiCert Inc, C = US)   (CN - CN stands for common name, generally DNS name)
+- Certificate Thumbprint (e.g. cdab029a5d8270733d3c23780de47311e90f27fe)
+- Certificate serial number (e.g. 05a0622301d54be4288bb743e2f2b510)
+- Certificate valid from (e.g. 22 May 2018 05:30:00)
+- Certificate valid to (e.g. 20 June 2020 17:30:00)
+- Subject (CN = quora.com)
+- Subject Alternate Name (e.g. DNS Name=*.fs.quoracdn.net, DNS Name=*.qr.ae, DNS Name=*.quora.com, DNS Name=*.tch.quora.com, DNS Name=*.tch.www.quora.com)
+- Public key (e.g. 2048 bits in case of RSA)
+- Signature hash algorithm (e.g. SHA256)
+- Signature algorithm (SHA256RSA) etc
+
 
 2.1) Authentication over network
 
@@ -79,13 +92,18 @@ https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.0/htm
 
 
 Topic 3) SSL certificates
+SSL is a communication protocol that is used for securing communications (transactions) between two parties say client & server. Usually client is your web browser and server is website with whom you are interacting.
+
+SSL: Secure Sockets Layer (SSL) protocol governs server authentication, client authentication, and encrypted communication between servers and clients.SSL is widely used on the Internet, especially for interactions that involve exchanging confidential information such as credit card numbers.
+
+
 
 
 
 topic 4) Certificates from CA
 
 
-
+https over TLS (newer) OR https over SSL (older)
 
 Topic 5) MAC - Message authentication code (Used for authentication as well as integrity of message exchanged)
 
