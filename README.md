@@ -55,6 +55,7 @@ Topic 1.5) encryption vs signature
 
 Topic 2) Certificates
 Certificates have a purpose: to establish trust.
+
 What all the things a certificate generally has?
 - certificate version number
 - Certificate issuer (e.g. CN = Thawte RSA CA 2018, OU = www.digicert.com, O = DigiCert Inc, C = US)   (CN - CN stands for common name, generally DNS name)
@@ -68,6 +69,21 @@ What all the things a certificate generally has?
 - Signature hash algorithm (e.g. SHA256)
 - Signature algorithm (SHA256RSA) etc
 
+What all the things can be achieved by using certificates:
+- Identification / Authentication:
+    The persons / entities with whom we are communicating are really who they say they are.
+
+- Confidentiality:
+    The information within the message or transaction is kept confidential. It may only be read and understood by the intended sender and receiver.
+
+- Integrity:
+    The information within the message or transaction is not tampered accidentally or deliberately with en route without all parties involved being aware of the tampering.
+
+- Non-Repudiation:
+    The sender cannot deny sending the message or transaction, and the receiver cannot deny receiving it.
+
+- Access Control:
+    Access to the protected information is only realized by the intended person or entity.
 
 2.1) Authentication over network
 
