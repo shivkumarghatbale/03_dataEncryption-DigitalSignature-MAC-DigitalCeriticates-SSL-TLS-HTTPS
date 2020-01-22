@@ -97,6 +97,29 @@ Non-repudiation: If the recipient passes the message and the proof to a third pa
 Both MAC & Digital signature does not gurrenty secrecy of message shared, whereas encryption gurrenties the secrecy of message shared.
 (MAC is same as access key based AAD authentication. And digital signature is same as certificate based AAD authentication)
 
+Topic 1.6) Digitial signature vs digital certificate
+Digital Signature is an attachment to the electronic document which can be viewed as a signature. Once a document is signed, its data can not be altered without invalidating the signature. Digital Signature is created using signer’s key for encrypting the document.
+
+A Digital Certificate is simply a computer file which helps in establishing your identity. It officially approves the relation between the holder of the certificate (the user) and a particular public key. Thus, a digital certificate should include the user name and the user’s public key. This will prove that the certain public key owned by a particular user.
+A digital certificate consists of the following information: Subject name (User’s name is referred to as Subject name because a digital certificate can be issued to an individual, a group or an organization), Serial number, Validity date range and issuer name, etc.
+
+digital certificates are used to verify the trustworthiness of a person (sender), while digital signatures are used to verify the trustworthiness of the data being sent.
+
+The digital signature proves the authenticity of the digital document. On the other hand, digital certificate identifies the website.
+A digital certificate is digitally signed and can be used to sign other documents digitally. Digital signature of CA is verified on the digital certificate.
+Digital certificate creation process includes key generation, registration, verification and creation steps. In contrast, Digital signature process includes encryption and decryption of the message at the sender’s and receiver’s end respectively.
+
+Authentication & security for message: 
+A is sender of message and B is receiver of message. 
+A has public key of B (PubKeyB) and B has public key of A (PubKeyA)
+A has message M. A creates hash of of message M (Hash(M) = H).
+A creats a signature (S) using it's private key (PriKeyA) and Hash of message (H) 
+A encrypts the message M with B's PubKeyB (EM).
+A sends encrypted message (EM) and digitial signature (S) to B.
+B using PriKeyB decrypts EM to get M.
+B hashes M to get H
+B uses PubKeyA & signature S to get H. If both the hashes matches then it validates the authenticity of the message. Amd since encrypted message EM was sent over the n/w this ensures secureness of the message over n/w.
+
 Topic 2) Certificates
 Certificates have a purpose: to establish trust.
 
@@ -148,7 +171,14 @@ SSL is a communication protocol that is used for securing communications (transa
 
 SSL: Secure Sockets Layer (SSL) protocol governs server authentication, client authentication, and encrypted communication between servers and clients.SSL is widely used on the Internet, especially for interactions that involve exchanging confidential information such as credit card numbers.
 
+How SSL Certificates Work
+A browser or server attempts to connect to a website (i.e. a web server) secured with SSL. The browser/server requests that the web server identify itself.
+The web server sends the browser/server a copy of its SSL certificate. 
+The browser/server checks to see whether or not it trusts the SSL certificate. (browser/server may choose to validate certificate with CA or validate digital signature of CA on the certificate.) If so, it creates a key, encrypts it using public key of certificate and sends it to web server. Web server decrypts the message using it's private key to get the key of client.
+The web server sends back a digitally signed acknowledgement to start an SSL encrypted session.
+Encrypted data is shared between the browser/server and the web server.
 
+This way data sent from client to server is encrypted using web server's public key. And data sent from web server to client is encrypted using client's symmetric key. 
 
 
 
