@@ -109,7 +109,7 @@ The digital signature proves the authenticity of the digital document. On the ot
 A digital certificate is digitally signed and can be used to sign other documents digitally. Digital signature of CA is verified on the digital certificate.
 Digital certificate creation process includes key generation, registration, verification and creation steps. In contrast, Digital signature process includes encryption and decryption of the message at the sender’s and receiver’s end respectively.
 
-Authentication & security for message: 
+A) Authentication & security for message: 
 A is sender of message and B is receiver of message. 
 A has public key of B (PubKeyB) and B has public key of A (PubKeyA)
 A has message M. A creates hash of of message M (Hash(M) = H).
@@ -119,6 +119,16 @@ A sends encrypted message (EM) and digitial signature (S) to B.
 B using PriKeyB decrypts EM to get M.
 B hashes M to get H
 B uses PubKeyA & signature S to get H. If both the hashes matches then it validates the authenticity of the message. Amd since encrypted message EM was sent over the n/w this ensures secureness of the message over n/w.
+
+
+B) Authentication & security for message using SSL certificate: 
+A is sender of message and B is receiver of message. 
+A asks for B's SSL certificate.
+A gets B's SSL certificate. SSL certificate has digital signature of trusted CA. A using public key of trusted CA verifies the digitial signature of trusted CA. Thus A validates identity of B. (i.e. A trusts CA since certificate has CA's signature)
+A generates symmetric key and it encrypts using public key in certicate and sends it to B.
+B decrypts the encrypted message using it's private key to get the symmetric key.
+Now this symmetric key is used for sending data A to B and/or B to A. 
+Since data encryption/decryption is faster using symmetric key (Assymetric encryption is nothing but a big mathematical formula which is high CPU intensive hence is avoided in longer/ more messages encryptions) this approach is preffered than earlier one where actual data was encrypted using public key.
 
 Topic 2) Certificates
 Certificates have a purpose: to establish trust.
@@ -153,7 +163,8 @@ What all the things can be achieved by using certificates:
     Access to the protected information is only realized by the intended person or entity.
 
 
-
+Why digital certificate:
+the problem with digital signature is that one cannot identify true indentity of sender & it's public key. Digital certificate is a way of associating an entity with a public key. (certificate = entity name + entity public key )
 
 2.1) Authentication over network
 
@@ -180,21 +191,15 @@ Encrypted data is shared between the browser/server and the web server.
 
 This way data sent from client to server is encrypted using web server's public key. And data sent from web server to client is encrypted using client's symmetric key. 
 
+HTTP + SSL = HTTPS. HTTPS means communication between browser & web server is encrypted. SSL certificate is web server's digital certificate issued by trusted CA.
 
-
-topic 4) Certificates from CA
-
+How it works:
+A is browser and B is web server.
+A requests secure pages from B.
+B sends it's SSL certificate to A. SSL certificate has digital signature of trusted CA. A using public key of trusted CA verifies the digitial signature of trusted CA. Thus A validates identity of B. (i.e. A trusts CA & certificate has CA's signature that means A trust certificate.)
+A generates symmetric key and it encrypts using public key in certicate and sends it to B.
+B decrypts the encrypted message using it's private key to get the symmetric key.
+Now this symmetric key is used for sending data A to B and/or B to A. 
 
 https over TLS (newer) OR https over SSL (older)
 
-Topic 5) MAC - Message authentication code (Used for authentication as well as integrity of message exchanged)
-
-Topic 5 A) HMAC-SHA256 : Hash based Message Authentication Code. (Using symmetric key)
-1) Creater of message first encrypts the message with secret it has, then computes hash. 
-2) Creater sends a pair of message (i.e. unencrypted message) & hash computed in step (1) to receiver. (Note: in this type of MAC, user shall not care if the message is read by third party person. Message is not supposed to have sensitive info.)
-3) Receiver encrypts the message (i.e. unencrypted message from step (2)) with secret key it has (i.e. creater & receiver should use same key) & computes the hash upon receiving pair of message & hash from sender.
-4) If computed hash in step (3) & received hash matches then message is correct.
-This way we validate data integrity (if message is modified in the transit, then hash computed by receiver will be different than received hash) and authenticity (i.e. if key used is different then computed hash will be different than received hash)
-5) Based on the content of message, receiver would take different actions.
-
-Topic 5 B) RSASHA256 (Using Assymmetric key):
